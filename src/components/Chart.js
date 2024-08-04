@@ -1,12 +1,4 @@
-import {
-  Box,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Paper,
-  Select,
-  Typography,
-} from "@mui/material";
+import { Box, FormControl, MenuItem, Select, Typography } from "@mui/material";
 import { BarChart } from "@mui/x-charts";
 import { axisClasses } from "@mui/x-charts/ChartsAxis";
 import React, { useEffect, useRef, useState } from "react";
