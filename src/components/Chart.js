@@ -8,7 +8,7 @@ import { Color } from "../constants/Colors";
 function useResizeObserver() {
   const ref = useRef();
   const [dimensions, setDimensions] = useState({
-    width: window.innerWidth - 250,
+    width: window.innerWidth - 112,
   });
 
   useEffect(() => {
