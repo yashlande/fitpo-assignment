@@ -29,11 +29,39 @@ function useResizeObserver() {
 }
 
 const Chart = () => {
-  const [duration, setDuration] = React.useState("");
+  const [duration, setDuration] = React.useState(10);
   const [chartRef, chartDimensions] = useResizeObserver();
+  const [chartData, setChartData] = useState([
+    { data: [4, 3, 5, 10, 8, 9] },
+    { data: [1, 6, 3, 10, 8, 9] },
+    { data: [2, 5, 6, 10, 8, 9] },
+    { data: [2, 5, 6, 10, 8, 9] },
+    { data: [2, 5, 6, 10, 8, 9] },
+    { data: [2, 5, 6, 10, 8, 9] },
+  ]);
 
   const handleDurationChange = (event) => {
+    const value = event.target.value;
     setDuration(event.target.value);
+    if (value === 10) {
+      setChartData([
+        { data: [4, 3, 5, 10, 8, 9] },
+        { data: [1, 6, 3, 10, 8, 9] },
+        { data: [2, 5, 6, 10, 8, 9] },
+        { data: [2, 5, 6, 10, 8, 9] },
+        { data: [2, 5, 6, 10, 8, 9] },
+        { data: [2, 5, 6, 10, 8, 9] },
+      ]);
+    } else if (value === 20) {
+      setChartData([
+        { data: [4 * 3, 3 * 3, 5 * 3, 10 * 3, 8 * 3, 9 * 3] },
+        { data: [1 * 3, 6 * 3, 3 * 3, 10 * 3, 8 * 3, 9 * 3] },
+        { data: [2 * 3, 5 * 3, 6 * 3, 10 * 3, 8 * 3, 9 * 3] },
+        { data: [2 * 3, 5 * 3, 6 * 3, 10 * 3, 8 * 3, 9 * 3] },
+        { data: [2 * 3, 5 * 3, 6 * 3, 10 * 3, 8 * 3, 9 * 3] },
+        { data: [2 * 3, 5 * 3, 6 * 3, 10 * 3, 8 * 3, 9 * 3] },
+      ]);
+    }
   };
 
   return (
@@ -76,12 +104,8 @@ const Chart = () => {
             displayEmpty
             onChange={handleDurationChange}
           >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
             <MenuItem value={10}>Weekly</MenuItem>
             <MenuItem value={20}>Monthly</MenuItem>
-            <MenuItem value={30}>Yearly</MenuItem>
           </Select>
         </FormControl>
       </Box>
@@ -110,14 +134,7 @@ const Chart = () => {
             ],
           },
         ]}
-        series={[
-          { data: [4, 3, 5, 10, 8, 9] },
-          { data: [1, 6, 3, 10, 8, 9] },
-          { data: [2, 5, 6, 10, 8, 9] },
-          { data: [2, 5, 6, 10, 8, 9] },
-          { data: [2, 5, 6, 10, 8, 9] },
-          { data: [2, 5, 6, 10, 8, 9] },
-        ]}
+        series={chartData}
         borderRadius={50}
         width={chartDimensions.width}
         height={220}
