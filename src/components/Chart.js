@@ -7,7 +7,9 @@ import { Color } from "../constants/Colors";
 
 function useResizeObserver() {
   const ref = useRef();
-  const [dimensions, setDimensions] = useState({ width: 1000 });
+  const [dimensions, setDimensions] = useState({
+    width: window.innerWidth - 250,
+  });
 
   useEffect(() => {
     const handleResize = () => {
