@@ -19,7 +19,7 @@ const Dashboard = () => {
         Dashboard
       </Typography>
       <Grid container spacing={2}>
-        <Grid item md={8}>
+        <Grid item xl={8}>
           <Box
             sx={{
               display: "flex",
@@ -29,7 +29,7 @@ const Dashboard = () => {
             }}
           >
             <Grid container spacing={4}>
-              <Grid item sm={3}>
+              <Grid item md={3}>
                 <Card
                   imageName={totalOrders}
                   cardHeading={"Total Orders"}
@@ -38,7 +38,7 @@ const Dashboard = () => {
                   percentageType="up"
                 />
               </Grid>
-              <Grid item sm={3}>
+              <Grid item md={3}>
                 <Card
                   imageName={totalOrders}
                   cardHeading={"Total Delivered"}
@@ -47,7 +47,7 @@ const Dashboard = () => {
                   percentageType="down"
                 />
               </Grid>
-              <Grid item sm={3}>
+              <Grid item md={3}>
                 <Card
                   imageName={totalOrders}
                   cardHeading={"Total Cancelled"}
@@ -56,7 +56,7 @@ const Dashboard = () => {
                   percentageType="up"
                 />
               </Grid>
-              <Grid item sm={3}>
+              <Grid item md={3}>
                 <Card
                   imageName={totalOrders}
                   cardHeading={"Total Revenue"}
@@ -68,7 +68,7 @@ const Dashboard = () => {
             </Grid>
           </Box>
         </Grid>
-        <Grid item md={4}>
+        <Grid item xl={4}>
           <NetProfit />
         </Grid>
         <Grid item sm={8}>

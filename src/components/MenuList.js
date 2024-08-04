@@ -51,7 +51,6 @@ const MenuList = () => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              borderRadius: 1,
               marginBottom: index !== menuItems.length - 1 ? 1 : 0,
               padding: 2,
             }}

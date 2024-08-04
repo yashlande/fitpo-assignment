@@ -14,7 +14,12 @@ function Main() {
         <LeftSideBar />
         <Box
           component="main"
-          sx={{ flexGrow: 1, p: 3, background: Color.BackgroundSecondary }}
+          sx={{
+            flexGrow: 1,
+            p: 3,
+            background: Color.BackgroundSecondary,
+            width: "80vw",
+          }}
         >
           <Dashboard />
         </Box>
