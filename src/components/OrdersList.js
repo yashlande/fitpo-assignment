@@ -1,5 +1,6 @@
 import React from "react";
-import { List, ListItem, ListItemText, Avatar } from "@mui/material";
+import { Avatar, Box, Typography, Chip } from "@mui/material";
+import { Color } from "../constants/Colors";
 
 const orders = [
   {
@@ -48,19 +49,135 @@ const orders = [
 
 const OrdersList = () => {
   return (
-    <List>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        width: "100%",
+        padding: "10px",
+        borderRadius: "10px",
+        backgroundColor: Color.BackgroundPrimary,
+      }}
+    >
+      <Typography
+        sx={{
+          color: "white",
+          fontSize: "20px",
+          fontWeight: "600",
+          marginBottom: "20px",
+        }}
+        gutterBottom
+      >
+        Recent Orders
+      </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          borderBottom: "1px solid gray",
+          paddingBottom: "5px",
+        }}
+      >
+        <Box sx={{ display: "flex", flex: 1 }}>
+          <Typography
+            sx={{ color: "white", fontSize: "12px", fontWeight: "600" }}
+          >
+            Customer
+          </Typography>
+        </Box>
+        <Box sx={{ display: "flex", flex: 1 }}>
+          <Typography
+            sx={{ color: "white", fontSize: "12px", fontWeight: "600" }}
+          >
+            Order No.
+          </Typography>
+        </Box>
+        <Box sx={{ display: "flex", flex: 1 }}>
+          <Typography
+            sx={{ color: "white", fontSize: "12px", fontWeight: "600" }}
+          >
+            Amount
+          </Typography>
+        </Box>
+        <Box sx={{ display: "flex", flex: 1 }}>
+          <Typography
+            sx={{ color: "white", fontSize: "12px", fontWeight: "600" }}
+          >
+            Status
+          </Typography>
+        </Box>
+      </Box>
       {orders.map((order) => (
-        <ListItem key={order.id}>
-          <Avatar sx={{ bgcolor: "primary.main", mr: 2 }}>
-            {order.name[0]}
-          </Avatar>
-          <ListItemText
-            primary={`${order.name} - ${order.amount}`}
-            secondary={`Order No: ${order.orderNo} - ${order.status}`}
-          />
-        </ListItem>
+        <Box
+          key={order.id}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            borderBottom: "1px solid gray",
+            paddingBottom: "5px",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flex: 1,
+              alignItems: "center",
+              height: "50px",
+            }}
+          >
+            <Avatar
+              sx={{
+                bgcolor: "primary.main",
+                mr: 1,
+                width: "30px",
+                height: "30px",
+              }}
+            >
+              {order.name[0]}
+            </Avatar>
+            <Typography sx={{ color: "white", fontSize: "12px" }}>
+              {order.name}
+            </Typography>
+          </Box>
+          <Box sx={{ display: "flex", flex: 1 }}>
+            <Typography sx={{ color: "white", fontSize: "12px" }}>
+              {order.orderNo}
+            </Typography>
+          </Box>
+          <Box sx={{ display: "flex", flex: 1 }}>
+            <Typography sx={{ color: "white", fontSize: "12px" }}>
+              {order.amount}
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              flex: 1,
+            }}
+          >
+            <Chip
+              label={order.status}
+              color={order.status === "Delivered" ? "success" : "error"}
+            />
+          </Box>
+        </Box>
       ))}
-    </List>
+    </Box>
+    // <List>
+    //   {orders.map((order) => (
+    //     <ListItem key={order.id}>
+    //       <Avatar sx={{ bgcolor: "primary.main", mr: 2 }}>
+    //         {order.name[0]}
+    //       </Avatar>
+    //       <ListItemText
+    //         primary={`${order.name} - ${order.amount}`}
+    //         secondary={`Order No: ${order.orderNo} - ${order.status}`}
+    //       />
+    //     </ListItem>
+    //   ))}
+    // </List>
   );
 };
 

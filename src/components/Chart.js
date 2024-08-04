@@ -1,53 +1,134 @@
-import React from "react";
 import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
+  Box,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Paper,
+  Select,
+  Typography,
+} from "@mui/material";
+import { BarChart } from "@mui/x-charts";
+import { axisClasses } from "@mui/x-charts/ChartsAxis";
+import React, { useEffect, useRef, useState } from "react";
 
-const data = [
-  { name: "5", value: 4000 },
-  { name: "9", value: 3000 },
-  { name: "11", value: 2000 },
-  { name: "13", value: 2780 },
-  { name: "15", value: 1890 },
-  { name: "17", value: 2390 },
-  { name: "19", value: 3490 },
-  { name: "21", value: 3490 },
-  { name: "23", value: 2000 },
-  { name: "25", value: 1500 },
-];
+import { Color } from "../constants/Colors";
+
+function useResizeObserver() {
+  const ref = useRef();
+  const [dimensions, setDimensions] = useState({ width: 1000 });
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (ref.current) {
+        setDimensions({
+          width: ref.current.offsetWidth,
+        });
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [ref]);
+
+  return [ref, dimensions];
+}
 
 const Chart = () => {
+  const [duration, setDuration] = React.useState("");
+  const [chartRef, chartDimensions] = useResizeObserver();
+
+  const handleDurationChange = (event) => {
+    setDuration(event.target.value);
+  };
+
   return (
-    <ResponsiveContainer width="100%" height={300}>
-      <LineChart
-        data={data}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
+    <Box
+      ref={chartRef}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        width: "100%",
+        backgroundColor: Color.BackgroundPrimary,
+      }}
+    >
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+          padding: "10px",
         }}
       >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line
-          type="monotone"
-          dataKey="value"
-          stroke="#8884d8"
-          activeDot={{ r: 8 }}
-        />
-      </LineChart>
-    </ResponsiveContainer>
+        <Typography sx={{ fontWeight: "600", fontSize: 16, color: "white" }}>
+          Activity
+        </Typography>
+        <FormControl
+          variant="outlined"
+          sx={{
+            m: 1,
+            minWidth: 120,
+            backgroundColor: "gray",
+            borderRadius: 50,
+            border: "none",
+          }}
+          size="small"
+        >
+          <Select
+            sx={{ color: "white" }}
+            labelId="demo-select-small-label"
+            id="demo-select-small"
+            value={duration}
+            displayEmpty
+            onChange={handleDurationChange}
+          >
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={10}>Weekly</MenuItem>
+            <MenuItem value={20}>Monthly</MenuItem>
+            <MenuItem value={30}>Yearly</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
+      <BarChart
+        sx={{
+          [`.${axisClasses.root}`]: {
+            [`.${axisClasses.tick}, .${axisClasses.line}`]: {
+              stroke: "gray",
+              strokeWidth: 3,
+            },
+            [`.${axisClasses.tickLabel}`]: {
+              fill: "gray",
+            },
+          },
+        }}
+        xAxis={[
+          {
+            scaleType: "band",
+            data: [
+              "group A",
+              "group B",
+              "group C",
+              "group D",
+              "group E",
+              "group F",
+            ],
+          },
+        ]}
+        series={[
+          { data: [4, 3, 5, 10, 8, 9] },
+          { data: [1, 6, 3, 10, 8, 9] },
+          { data: [2, 5, 6, 10, 8, 9] },
+          { data: [2, 5, 6, 10, 8, 9] },
+          { data: [2, 5, 6, 10, 8, 9] },
+          { data: [2, 5, 6, 10, 8, 9] },
+        ]}
+        borderRadius={50}
+        width={chartDimensions.width}
+        height={220}
+      />
+    </Box>
   );
 };
 

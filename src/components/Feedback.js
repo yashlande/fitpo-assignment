@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import { Box } from "@mui/system";
+import { Color } from "../constants/Colors";
 
 const feedbacks = [
   {
@@ -30,28 +31,94 @@ const feedbacks = [
     stars: 4,
     feedback: "The wings are lean meaty and tender, and very spicy.",
   },
+  {
+    id: 4,
+    name: "Devon Lane",
+    stars: 4,
+    feedback: "The wings are lean meaty and tender, and very spicy.",
+  },
+  {
+    id: 5,
+    name: "Devon Lane",
+    stars: 4,
+    feedback: "The wings are lean meaty and tender, and very spicy.",
+  },
 ];
 
 const Feedback = () => {
   return (
-    <List>
-      {feedbacks.map((feedback) => (
-        <ListItem key={feedback.id} alignItems="flex-start">
-          <Avatar sx={{ bgcolor: "primary.main", mr: 2 }}>
-            {feedback.name[0]}
-          </Avatar>
-          <Box>
-            <Typography variant="h6">{feedback.name}</Typography>
-            <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
-              {[...Array(feedback.stars)].map((_, i) => (
-                <StarIcon key={i} sx={{ color: "gold" }} />
-              ))}
-            </Box>
-            <ListItemText secondary={feedback.feedback} />
-          </Box>
-        </ListItem>
-      ))}
-    </List>
+    <Box
+      sx={{
+        backgroundColor: Color.BackgroundPrimary,
+        borderRadius: "10px",
+        height: 430,
+        overflow: "hidden",
+      }}
+    >
+      <Box sx={{ padding: "10px", marginLeft: "10px" }}>
+        <Typography
+          sx={{
+            color: "white",
+            fontSize: "20px",
+            fontWeight: "600",
+            position: "sticky",
+          }}
+          gutterBottom
+        >
+          Customer's Feedback
+        </Typography>
+      </Box>
+      <Box
+        sx={{
+          height: 390,
+          overflowY: "scroll",
+          width: "100%",
+          "&::-webkit-scrollbar": {
+            width: "7px",
+            height: "7px",
+          },
+
+          "&::-webkit-scrollbar-thumb": {
+            background: "#f1f1f1",
+            borderRadius: "10px",
+          },
+          "&::-webkit-scrollbar-thumb:hover": {
+            background: "#555",
+          },
+        }}
+      >
+        <List>
+          {feedbacks.map((feedback) => (
+            <ListItem key={feedback.id} alignItems="flex-start">
+              <Avatar sx={{ bgcolor: "primary.main", mr: 2 }}>
+                {feedback.name[0]}
+              </Avatar>
+              <Box>
+                <Typography variant="h6" color={"white"}>
+                  {feedback.name}
+                </Typography>
+                <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
+                  {[...Array(feedback.stars)].map((_, i) => (
+                    <StarIcon key={i} sx={{ color: "gold" }} />
+                  ))}
+                  {[...Array(5 - feedback.stars)].map((_, i) => (
+                    <StarIcon key={i} sx={{ color: "white" }} />
+                  ))}
+                </Box>
+                <ListItemText
+                  sx={{
+                    "& .MuiListItemText-secondary": {
+                      color: "gray",
+                    },
+                  }}
+                  secondary={feedback.feedback}
+                />
+              </Box>
+            </ListItem>
+          ))}
+        </List>
+      </Box>
+    </Box>
   );
 };
 
